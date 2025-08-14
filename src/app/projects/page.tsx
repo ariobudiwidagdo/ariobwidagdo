@@ -7,7 +7,7 @@ const projects = [
     link: 'https://crampas.ai',
   },
   {
-    title: 'MyOrbit App',
+    title: 'MyOrbit App & Web',
     description: 'Cross-platform app for Telkomsel’s MyOrbit service using React Native and React.js.',
     link: 'https://myorbit.telkomsel.com',
   },
