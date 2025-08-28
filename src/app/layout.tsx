@@ -3,7 +3,7 @@ import { ThemeProvider } from '../context/ThemeContext'
 import ClientLayout from '../components/ClientLayout'
 
 export const metadata = {
-  title: 'Ario Budi Widagdo Portfolio',
+  title: 'Ario Budi Widagdo',
   description: 'Frontend Engineer Portfolio',
 }
 
