@@ -1,33 +1,26 @@
 'use client'
 import React from 'react'
-import { motion } from 'framer-motion'
-import { useTheme } from '../context/ThemeContext'
+import { Moon, Sun } from 'lucide-react'
 
-export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
+// The theme lives on <html class="dark">, set before paint by the script in layout.tsx,
+// so toggling only flips that class — no React re-render of the whole tree.
+export default function ThemeToggle({ label }: { label: string }) {
+  const toggleTheme = () => {
+    const isDark = document.documentElement.classList.toggle('dark')
+    try {
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    } catch {}
+  }
 
   return (
-    <motion.button
+    <button
+      type="button"
       onClick={toggleTheme}
-      className={`relative w-14 h-7 rounded-full p-1 transition-colors duration-300 ${
-        theme === 'dark' 
-          ? 'bg-gradient-to-r from-indigo-600 to-purple-600' 
-          : 'bg-gradient-to-r from-yellow-400 to-orange-400'
-      }`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      aria-label={label}
+      className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border bg-card text-muted-foreground transition-colors hover:text-foreground"
     >
-      <motion.div
-        className={`w-5 h-5 rounded-full shadow-md flex items-center justify-center text-xs ${
-          theme === 'dark' ? 'bg-gray-800 text-yellow-400' : 'bg-white text-gray-800'
-        }`}
-        animate={{
-          x: theme === 'dark' ? 0 : 24,
-        }}
-        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-      >
-        {theme === 'dark' ? '🌙' : '☀️'}
-      </motion.div>
-    </motion.button>
+      <Sun className="h-4 w-4 dark:hidden" />
+      <Moon className="hidden h-4 w-4 dark:block" />
+    </button>
   )
 }
